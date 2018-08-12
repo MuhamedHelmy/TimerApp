@@ -26,10 +26,10 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        seekBar = (SeekBar) findViewById(R.id.seekbar);
-        textView = (TextView) findViewById(R.id.text);
-        btn = (Button) findViewById(R.id.button);
-        imageView = (ImageView) findViewById(R.id.image);
+        seekBar = findViewById(R.id.seekbar);
+        textView = findViewById(R.id.text);
+        btn = findViewById(R.id.button);
+        imageView = findViewById(R.id.image);
 
         seekBar.setProgress(30);
         seekBar.setMax(3600);
@@ -81,7 +81,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void update(int time) {
-        int minuite = (int) time / 60;
+        int minuite = time / 60;
         int secondes = time - minuite * 60;
         String secon = Integer.toString(secondes);
         if (secondes <= 9) {
@@ -102,5 +102,11 @@ public class MainActivity extends AppCompatActivity {
         countDownTimer.cancel();
         btn.setText("Start");
         running = true;
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        reset();
     }
 }
